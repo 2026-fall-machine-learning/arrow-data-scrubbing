@@ -7,7 +7,9 @@ authors = [
     { name = "ArrowH23618", email = "khaugen@madisoncollege.edu" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "pandas>=3.0.6",
+]
 
 [project.scripts]
 arrow-data-scrubbing = "arrow_data_scrubbing:main"
@@ -15,3 +17,9 @@ arrow-data-scrubbing = "arrow_data_scrubbing:main"
 [build-system]
 requires = ["uv_build>=0.12.11,<0.13.0"]
 build-backend = "uv_build"
+
+[tool.uv]
+# OneDrive marks files under AppData\Local\uv\cache as cloud placeholders,
+# which Windows refuses to hardlink into .venv (os error 396). Copying
+# instead of hardlinking avoids that failure.
+link-mode = "copy"
